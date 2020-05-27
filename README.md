@@ -28,3 +28,60 @@
 
 ##Step 4: Import postman collection - https://www.getpostman.com/collections/9bb0f7911a11311a3e44
 
+or use Curl : 
+
+###Produce single event : 
+
+`$ curl -H "Content-Type: application/json" -d '{                                                                                            
+           "changeRequestId": "2",
+           "changeEventType": "OFFBOARD",
+           "userAdName": "manikuma",
+           "userEmail": "manikumar@linkedin.com",
+           "userOrg":"R&D",
+           "userDepartment":"EPE",
+           "userDesignation": "Software Engineer",
+           "flowEnum": "APPROVAL_REQUIRED"
+   }' http://localhost:9001/changeevent`
+   
+ ### Produce Bulk event
+ `$ curl -H "Content-Type: application/json"
+     -d '[
+         	{
+         		"changeRequestId": "1",
+         		"changeEventType": "ONBOARD",
+         		"userAdName": "manikuma",
+         		"userEmail": "manikumar@linkedin.com",
+         		"userOrg":"R&D",
+         		"userDepartment":"EPE",
+         		"userDesignation": "Software Engineer",
+         		"flowEnum": "APPROVAL_REQUIRED"
+         	},
+         	{
+         		"changeRequestId": "2",
+         		"changeEventType": "OFFBOARD",
+         		"userAdName": "shrkumar",
+         		"userEmail": "shrkumar@linkedin.com",
+         		"userOrg":"R&D",
+         		"userDepartment":"EPE",
+         		"userDesignation": "Staff Software Engineer",
+         		"flowEnum": "APPROVAL_REQUIRED"
+         	},
+         	{
+         		"changeRequestId": "3",
+         		"changeEventType": "ONBOARD",
+         		"userAdName": "tarmitha",
+         		"userEmail": "tarmitha@linkedin.com",
+         		"userOrg":"R&D",
+         		"userDepartment":"EPE",
+         		"userDesignation": "Software Engineer",
+         		"flowEnum": "APPROVAL_NOT_REQUIRED"
+         	}
+         ]' http://localhost:9001/changeevent`
+         
+ ### Check request queue
+ `$ curl http://localhost:9000/approvals`
+ 
+ ### Approve change request
+ `$ curl http://localhost:9000/approvals/2?action=APPROVED`
+ 
+ 
