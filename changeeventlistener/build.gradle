@@ -1,0 +1,31 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.8.BUILD-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.example.iam'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.kafka:spring-kafka'
+	// https://mvnrepository.com/artifact/org.apache.kafka/kafka-streams
+	compile group: 'org.apache.kafka', name: 'kafka-streams', version: '2.3.1'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+}
+
+test {
+	useJUnitPlatform()
+}
